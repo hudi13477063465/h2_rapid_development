@@ -10,13 +10,3 @@ CREATE TABLE t_subject
     PRIMARY KEY (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 create hash index if not exists subject_sort_idx ON t_subject (sort);
-
-CREATE TABLE t_subject_option
-(
-    subject_sort   int(11)      DEFAULT NULL,-- COMMENT '题目序号',
-    code           varchar(10)  DEFAULT NULL,-- COMMENT '选项编号',
-    option_content varchar(500) DEFAULT NULL,-- COMMENT '选项内容',
-    id             int(11) NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY (id)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-create hash index if not exists option_subject_sort_idx ON t_subject_option (subject_sort);

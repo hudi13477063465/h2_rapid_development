@@ -9,7 +9,7 @@ public class ReturnUtils {
 		for (int i = 0; i < args.length; i++) {
 			rsl.put(args[i].toString(), args[++i]);
 		}
-		rsl.put("success", "1");
+		rsl.put("success", "0000");
 		return rsl;
 	}
 

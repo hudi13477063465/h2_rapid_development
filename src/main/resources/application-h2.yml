@@ -9,7 +9,7 @@ spring:
     username: root
     password: hudi123
     #项目启动时执行,放在包的根目录下,ddl
-    schema: classpath:db/____sal_excel.sql
+    schema: classpath:db/____database_init.sql
     #项目启动时执行,放在包的根目录下,dml
     #data: classpath:db/data.sql
     #最大空闲,最小空闲,最大活跃,初始连接数

@@ -104,21 +104,6 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
-        <!--百度AI识别文字-->
-        <!--        <dependency>-->
-        <!--            <groupId>hudi</groupId>-->
-        <!--            <artifactId>hudi</artifactId>-->
-        <!--            <version>1.0</version>-->
-        <!--            <scope>system</scope>-->
-        <!--            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/aip-java-sdk-4.15.1.jar</systemPath>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>hudi</groupId>-->
-        <!--            <artifactId>hudi1</artifactId>-->
-        <!--            <version>1.0</version>-->
-        <!--            <scope>system</scope>-->
-        <!--            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/json-20160810.jar</systemPath>-->
-        <!--        </dependency>-->
 
         <dependency><!--PDF操作工具包-->
             <groupId>org.apache.pdfbox</groupId>
