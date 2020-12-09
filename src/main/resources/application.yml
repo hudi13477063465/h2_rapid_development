@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    include: h2
+  http:
+    multipart:
+      max-file-size: 536870912
+      max-request-size: 536870912
+  mvc:
+    servlet:
+      load-on-startup: 1
+
+mybatis:
+  mapper-locations: classpath:com/boot/security/server/mapper/*Mapper.xml
+  configuration:
+    mapUnderscoreToCamelCase: true   
+
+logging:
+  config: classpath:logback-admin.xml
+log:
+  level:
+    root: info
+    my: debug
+  file: logs/admin-server.log
+  maxsize: 30MB       
+
+server:
+  port: 8080
+files:
+  path: ${file-path:d:/files}

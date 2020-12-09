@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>答题工具</title>
+    <link rel="stylesheet" href="layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="formSelectV4/formSelects-v4.css" media="all"/>
+    <link rel="stylesheet" href="css/global.css" media="all"/>
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css" media="all"/>
+    <style type="text/css">
+
+        .custom-btn {
+            margin-top: 280px;
+        }
+
+        .bg {
+            background-image: url(img/a.jpeg);
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            opacity: 0.8;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+<div class="bg">
+
+    <div align="center" class="custom-btn">
+        <button type="button" class="layui-btn" id="uploadBtn"><i class="layui-icon"></i>上传题库</button>
+        <button type="button" class="layui-btn" id="clearBtn" onclick="clearSubject()">清空题库</button>
+        <button type="button" class="layui-btn" id="toAnswer" onclick="location.href='pages/answer.html'">去答题
+        </button>
+    </div>
+</div>
+
+<script type="text/javascript" src="layui/layui.js"></script>
+<!-- <script type="text/javascript" src="formSelectV4/formSelects-v4.js"></script> -->
+<script type="text/javascript" src="js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/jq.js"></script>
+<script type="text/javascript">
+
+
+    function clearSubject() {
+        $.ajax({
+            type: 'get',
+            url: '/subject/clear',
+            success: function (data) {
+                if (data && data.success) {
+                    layer.msg("操作成功", {
+                        icon: 6,
+                        time: 2000,//3秒太短
+                    });
+                } else {
+                    layer.msg("操作失败." + data.msg, {
+                        icon: 5,
+                        time: 10000,//3秒太短
+                    });
+                }
+            }
+        });
+    }
+
+    layui.config({}).extend({
+        formSelects: 'formSelectV4//formSelects-v4'
+    });
+    layui.use(['upload', 'layer', 'formSelects', 'element'], function () {
+        var layer = layui.layer;
+        var upload = layui.upload;
+        var element = layui.element;
+        var formSelects = layui.formSelects;
+        var isLoading;
+        /**定义ajax的公共部分添加加载中==========================================  */
+        $.ajaxSetup({
+            beforeSend: function () {
+                loading();
+            },
+            complete: function () {
+                loaded();
+            }
+
+        });
+
+
+        /**文件上传==========================================*/
+        upload.render({
+            elem: '#uploadBtn', //绑定元素
+            url: '/files/upload', //上传接口
+            //,multiple : true
+            accept: 'file',
+            exts: "txt|xlsx|csv",
+            done: function (res, index, upload) {
+                if (res && res.success) {
+                    layer.msg("上传成功", {
+                        icon: 6,
+                        time: 3000,//3秒太短
+                    });
+                } else {
+                    layer.msg("上传失败." + res.msg, {
+                        icon: 5,
+                        time: 10000,//3秒太短
+                    });
+                }
+
+                loaded();
+
+            },
+            error: function () {
+                layer.msg("上传失败", {
+                    icon: 5
+                });
+                loaded();
+            }
+        });
+
+        function loading() {
+            isLoading = layer.load(0/*loading的图形0,1,2三种*/, {
+                shade: true,//遮罩层
+                time: 2000 * 1000//关闭时间,没有则按照默认值,最后设置超长,后面手动关闭
+            });
+        }
+
+        function loaded() {
+            layer.close(isLoading);
+        }
+
+
+    });
+
+</script>
+</div>
+</body>
+
+</html>

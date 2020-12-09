@@ -1,0 +1,28 @@
+#h2
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    #内存模式
+    url: jdbc:h2:mem:saldb;MULTI_THREADED=1;MVCC=TRUE;AUTO_RECONNECT=TRUE;MODE=MYSQL;IGNORECASE=TRUE
+    #硬盘模式
+    #url: jdbc:h2:file:./database/saldb;MULTI_THREADED=1;MVCC=TRUE;AUTO_RECONNECT=TRUE;MODE=MYSQL;IGNORECASE=TRUE
+    username: root
+    password: hudi123
+    #项目启动时执行,放在包的根目录下,ddl
+    schema: classpath:db/____sal_excel.sql
+    #项目启动时执行,放在包的根目录下,dml
+    #data: classpath:db/data.sql
+    #最大空闲,最小空闲,最大活跃,初始连接数
+    max-idle: 8
+    min-idle: 2
+    max-active: 20
+    initial-size: 4
+  h2:
+    console:
+      settings:
+        #能远程访问控制台,内存模式也能远程访问,按需
+        web-allow-others: false
+      #配置项目启动 h2控制台就启动
+      enabled: true
+      #控制台url
+      path: /h2-console
